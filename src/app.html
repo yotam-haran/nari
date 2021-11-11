@@ -10,3 +10,46 @@
 		<div id="svelte">%svelte.body%</div>
 	</body>
 </html>
+
+<style>
+    /* heebo-regular - latin_hebrew */
+    @font-face {
+        font-family: 'Heebo';
+        font-style: normal;
+        font-weight: 400;
+        src: local(''),
+            url('../fonts/heebo-v12-latin_hebrew-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+            url('../fonts/heebo-v12-latin_hebrew-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    }
+
+    /* bellefair-regular - latin_hebrew */
+    @font-face {
+        font-family: 'Bellefair';
+        font-style: normal;
+        font-weight: 400;
+        src: local(''),
+            url('../fonts/bellefair-v6-latin_hebrew-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+            url('../fonts/bellefair-v6-latin_hebrew-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    }
+
+    /* cairo-regular - latin */
+    @font-face {
+        font-family: 'Cairo';
+        font-style: normal;
+        font-weight: 400;
+        src: local(''),
+            url('../fonts/cairo-v10-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+            url('../fonts/cairo-v10-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    }
+
+    body {
+        font-family: 'Heebo', sans-serif;
+        padding: 0;
+        margin: 0;
+        overflow-x: hidden;
+    }
+
+    body * {
+        box-sizing: border-box;
+    }
+</style>
