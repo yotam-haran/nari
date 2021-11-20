@@ -1,5 +1,6 @@
 <script>
     $: dialogOpen = false;
+    $: console.log(dialogOpen)
 </script>
 
 <svelte:head>
@@ -12,7 +13,7 @@
     <div style='align-self: flex-end'>הרשמה לרשימת הדיוור שלנו</div>
 </button>
 
-<dialog open={dialogOpen}>
+<dialog class={dialogOpen ? 'is-open' : ''}>
     <form autocomplete="off" action="https://gmail.us20.list-manage.com/subscribe/post?u=b16878b534bce3b1d71ab85fa&amp;id=c9778947ef" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
         <div id='close-dialog' on:click={() => dialogOpen = false}>X</div>
         <h2>
@@ -80,7 +81,7 @@
         background-color: rgba(0, 0, 0, 0.3);
     }
 
-    dialog:not([open]) {
+    dialog:not(.is-open) {
         display: none;
     }
 

@@ -91,7 +91,7 @@
         z-index: 2;
     }
 
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1024px) {
         #landing-page {
             flex-direction: column-reverse;
             justify-content: flex-end;
@@ -122,7 +122,8 @@
     @media screen and (max-width: 600px) {
         h1 {
             width: 66vw;
-            transform: translate(5%, -25%);
+            top: 1vw;
+            transform: translateX(5vw);
         }
 
         h1 .en {
@@ -135,6 +136,13 @@
 
         #landing-page-video {
             width: 80%;
+        }
+    }
+
+    @media screen and (max-width: 420px) {
+        #landing-page-video {
+            width: 100%;
+            border-radius: 0;
         }
     }
 </style>

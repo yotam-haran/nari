@@ -32,16 +32,22 @@
         .map(p => ({
             ...p,
             dateObj: p.datetime,
-            datetime: { he: translateMonth(format(p.datetime, 'd בLLL yyy ב-HH:mm')), en: format(p.datetime, 'LLLL do, yyyy @ HH:mm') },
+            datetime: {
+                he: translateMonth(format(p.datetime, 'd בLLL yyy ב-HH:mm')),
+                en: format(p.datetime, 'LLLL do, yyyy @ HH:mm'),
+                global: format(p.datetime, 'd/M/yyyy, HH:mm')
+            },
             ...locations[p.location]
         }))
-    })
+    });
+
+    const performancesTitle = { en: 'Upcoming Performances', he: 'הופעות קרובות' };
 </script>
 
 <div id='performance-list'>
     {#each ['en', 'he'] as locale}
         <h2 class={locale} style={locale === 'en' ? 'grid-column: span 2' : ''}>
-            {locale === 'en' ? 'Upcoming Performances' : 'הופעות קרובות'}
+            {performancesTitle[locale]}
         </h2>
     {/each}
     {#each performances.future as performance}
@@ -65,12 +71,40 @@
     {/each}
 </div>
 
+<div id='performance-list' class='mobile'>
+   
+    <h2>
+        {#each ['en', 'he'] as locale}
+            <div>{performancesTitle[locale]}</div>
+        {/each}
+    </h2>
+    {#each performances.future as performance}
+        <div class='list-item'>
+            {#each ['en', 'he'] as locale}
+                <a href={`https://goo.gl/maps/${performance.mapsRef}`} rel='noreferrer' target='_blank'>{performance.location[locale]}</a>
+            {/each}
+            <div class='item-time'>
+                {performance.datetime.global}
+            </div>
+            {#if performance.tix}
+                <a class='tix-icon' href={performance.tix} rel='noreferrer' target='_blank'>
+                    <img src='tix.svg' alt='Tickets icon' />
+                </a>
+            {/if}
+        </div>
+    {/each}
+</div>
+
 <style>
     #performance-list {
         margin: 3rem auto 2rem;
         width: 30rem;
         display: grid;
         grid-template-columns: 1fr 60px 1fr;
+    }
+
+    #performance-list.mobile {
+        display: none;
     }
 
     #performance-list .he {
@@ -83,18 +117,19 @@
         flex-direction: column;
     }
 
-    .list-item a {
+    .list-item a:not(.tix-icon) {
         text-decoration: none;
         color: rgb(48, 8, 160);
         margin-bottom: 0.2rem;
         width: fit-content;
         transition: text-shadow 0.2s;
     }
-    .list-item a:hover {
+
+    .list-item a:not(.tix-icon):hover {
         text-shadow: 1px 0 3px #bbb;
     }
 
-    .list-item a:active, .list-item a:focus-visible {
+    .list-item a:not(.tix-icon):active, .list-item a:not(.tix-icon):focus-visible {
         text-shadow: 1px 1px 1px #777;
     }
 
@@ -133,11 +168,80 @@
     @media screen and (max-width: 600px) {
         #performance-list {
             width: 80%;
-            font-size: 2.7vw;
+        }
+
+        /* #performance-list:not(.mobile) {
+            display: none;
+        }
+
+        h2 {
+            display: flex;
+            flex-direction: column;
+            width: 70vw;
+            margin: 0 auto;
+            font-size: 5vw;
+        }
+
+        h2 > :last-child {
+            align-self: flex-end;
+            letter-spacing: .25rem;
         }
 
         .item-time {
             font-size: 2.4vw;
+        } */
+    }
+
+    @media screen and (max-width: 560px) {
+        #performance-list.mobile {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #performance-list:not(.mobile) {
+            display: none;
+        }
+
+        h2 {
+            display: flex;
+            flex-direction: column;
+            width: 70vw;
+            margin: 0 auto;
+            font-size: 5vw;
+            line-height: 5vw;
+        }
+
+        h2 > :last-child {
+            align-self: flex-end;
+            letter-spacing: .2rem;
+        }
+
+        .item-time {
+            font-size: 2.4vw;
+        }
+
+        .list-item {
+            align-items: center;;
+            line-height: 4vw;
+            position: relative;
+            font-size: 4vw;
+            width: fit-content;
+            margin: 2rem auto 0;
+            letter-spacing: .1rem;
+        }
+
+        .tix-icon {
+            width: 8vw;
+            transform: rotate(-40deg);
+            position: absolute;
+            right: -13vw;
+            top: .5rem;
+        }
+
+        .item-time {
+            margin: .3rem 0 1rem;
+            font-size: 4vw;
+            letter-spacing: initial;
         }
     }
 </style>
