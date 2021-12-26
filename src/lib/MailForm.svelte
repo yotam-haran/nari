@@ -46,6 +46,7 @@
 <style>
     #subscribe-button {
         display: flex;
+        align-items: flex-start;
         flex-direction: column;
         margin: 0 auto 2rem;
         font: inherit;
@@ -205,5 +206,11 @@
     }
     :global(.mce_inline_error:not(input)) {
         display: none !important;
+    }
+
+    @media screen and (max-width: 440px) {
+        #subscribe-button {
+            width: 90vw;
+        }
     }
 </style>

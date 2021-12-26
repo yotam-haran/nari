@@ -1,10 +1,14 @@
 <script>
     import { format, parse, compareAsc } from 'date-fns';
 
+    const programs = {
+        'love-and-prejudice': { he: 'אהבה ודעה קדומה', en: 'Love and Prejudice' }
+    }
+
     const locations = {
         JMC: { location: { he: 'המרכז למוסיקה ירושלים', en: 'Jerusalem Music Centre' }, mapsRef: 'nteBbNkoerzX1SUT8', tix: 'https://jmc.pres.ws/order/246' },
-        naan: { location: { he: 'בית ניגונים, נען', en: `Beit Nigunim, Na'an` }, mapsRef: 'meFwJXmauKj1yFiK8', tix: 'https://forms.gle/ukd6tLha7RM9b2B78' },
-        hecht: { location: { he: 'בית הכט, חיפה', en: `Hecht House, Haifa` }, mapsRef: 'iWeMF12W7yB2MTXG6' },
+        naan: { location: { he: 'בית ניגונים, נען', en: `Beit Nigunim, Na'an` }, mapsRef: 'meFwJXmauKj1yFiK8', tix: 'https://tickchak.co.il/24090' },
+        hecht: { location: { he: 'בית הכט, חיפה', en: `Hecht House, Haifa` }, mapsRef: 'iWeMF12W7yB2MTXG6', tix: 'https://www.hastudio-tr.co.il/events/512/' },
     }
 
     const now = new Date();
@@ -72,7 +76,6 @@
 </div>
 
 <div id='performance-list' class='mobile'>
-   
     <h2>
         {#each ['en', 'he'] as locale}
             <div>{performancesTitle[locale]}</div>
@@ -83,6 +86,10 @@
             {#each ['en', 'he'] as locale}
                 <a href={`https://goo.gl/maps/${performance.mapsRef}`} rel='noreferrer' target='_blank'>{performance.location[locale]}</a>
             {/each}
+            <div style='display: flex; flex-direction: column; align-items: center; margin: .2rem 0;'>
+                <div>{programs[performance.program].en}</div>
+                <div>{programs[performance.program].he}</div>
+            </div>
             <div class='item-time'>
                 {performance.datetime.global}
             </div>
@@ -231,10 +238,10 @@
         }
 
         .tix-icon {
-            width: 8vw;
+            width: 11vw;
             transform: rotate(-40deg);
             position: absolute;
-            right: -13vw;
+            right: -17vw;
             top: .5rem;
         }
 
