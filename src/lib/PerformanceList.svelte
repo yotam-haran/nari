@@ -14,8 +14,8 @@
     const now = new Date();
     let performances = [
         { program: 'love-and-prejudice', datetime: '10-12-2021 12:00', location: 'JMC' },
-        { program: 'love-and-prejudice', datetime: '18-01-2022 20:00', location: 'naan' },
-        { program: 'love-and-prejudice', datetime: '20-01-2022 20:00', location: 'hecht' },
+        { program: 'love-and-prejudice', datetime: '22-02-2022 20:00', location: 'naan' },
+        { program: 'love-and-prejudice', datetime: '02-04-2022 20:00', location: 'hecht' },
     ];
     performances.forEach(p => p.datetime = parse(p.datetime, 'dd-MM-yyyy HH:mm', new Date()));
     performances = { future: performances.filter(p => compareAsc(p.datetime, now) >= 0), past: performances.filter(p => compareAsc(p.datetime, now) < 0) };
