@@ -1,5 +1,6 @@
 <script>
     import { format, parse, compareAsc } from 'date-fns';
+    import { language } from '../utils/language.js';
 
     const programs = {
         'love-and-prejudice': { he: 'אהבה ודעה קדומה', en: 'Love and Prejudice' }
@@ -14,8 +15,8 @@
     const now = new Date();
     let performances = [
         { program: 'love-and-prejudice', datetime: '10-12-2021 12:00', location: 'JMC' },
-        { program: 'love-and-prejudice', datetime: '18-01-2022 20:00', location: 'naan' },
-        { program: 'love-and-prejudice', datetime: '20-01-2022 20:00', location: 'hecht' },
+        { program: 'love-and-prejudice', datetime: '22-02-2022 20:00', location: 'naan' },
+        { program: 'love-and-prejudice', datetime: '02-04-2022 20:00', location: 'hecht' },
     ];
     performances.forEach(p => p.datetime = parse(p.datetime, 'dd-MM-yyyy HH:mm', new Date()));
     performances = { future: performances.filter(p => compareAsc(p.datetime, now) >= 0), past: performances.filter(p => compareAsc(p.datetime, now) < 0) };
@@ -48,30 +49,22 @@
     const performancesTitle = { en: 'Upcoming Performances', he: 'הופעות קרובות' };
 </script>
 
-<div id='performance-list'>
-    {#each ['en', 'he'] as locale}
-        <h2 class={locale} style={locale === 'en' ? 'grid-column: span 2' : ''}>
-            {performancesTitle[locale]}
-        </h2>
-    {/each}
+<div id='performance-list' dir={$language.dir}>
+    <h2 class={$language.id} style={'grid-column: span 3'}>
+        {performancesTitle[$language.id]}
+    </h2>
     {#each performances.future as performance}
-        {#each ['en', 'he'] as locale}
-            <div class={`list-item ${locale}`}>
-                <a href={`https://goo.gl/maps/${performance.mapsRef}`} rel='noreferrer' target='_blank'>{performance.location[locale]}</a>
-                <div class='item-time'>
-                    {performance.datetime[locale]}
-                </div>
-            </div>
-            {#if locale === 'en'}
-                {#if performance.tix}
-                    <a class='tix-icon' href={performance.tix} rel='noreferrer' target='_blank'>
-                        <img src='tix.svg' alt='Tickets icon' />
-                    </a>
-                {:else}
-                    <div></div>
-                {/if}
-            {/if}
-        {/each}
+        <a href={`https://goo.gl/maps/${performance.mapsRef}`} rel='noreferrer' target='_blank'>{performance.location[$language.id]}</a>
+        <div class='item-time'>
+            {performance.datetime[$language.id]}
+        </div>
+        {#if performance.tix}
+            <a class='tix-icon' href={performance.tix} rel='noreferrer' target='_blank'>
+                <img src='tix.svg' alt='Tickets icon' />
+            </a>
+        {:else}
+            <div></div>
+        {/if}
     {/each}
 </div>
 
@@ -105,26 +98,19 @@
 <style>
     #performance-list {
         margin: 3rem auto 2rem;
-        width: 30rem;
+        width: max-content;
         display: grid;
-        grid-template-columns: 1fr 60px 1fr;
+        grid-template-columns: repeat(3, max-content);
+        align-items: center;
+        grid-gap: .5rem 2rem;
+        font-size: 1.2rem;
     }
 
     #performance-list.mobile {
         display: none;
     }
 
-    #performance-list .he {
-        direction: rtl;
-    }
-
-    .list-item {
-        margin-bottom: 1rem;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .list-item a:not(.tix-icon) {
+    #performance-list a:not(.tix-icon) {
         text-decoration: none;
         color: rgb(48, 8, 160);
         margin-bottom: 0.2rem;
@@ -132,11 +118,11 @@
         transition: text-shadow 0.2s;
     }
 
-    .list-item a:not(.tix-icon):hover {
+    #performance-list a:not(.tix-icon):hover {
         text-shadow: 1px 0 3px #bbb;
     }
 
-    .list-item a:not(.tix-icon):active, .list-item a:not(.tix-icon):focus-visible {
+    #performance-list a:not(.tix-icon):active, #performance-list a:not(.tix-icon):focus-visible {
         text-shadow: 1px 1px 1px #777;
     }
 
@@ -149,7 +135,7 @@
         width: 2rem;
         justify-self: center;
         --scale: 1;
-        transform: translate(1.5rem, 0.3rem) rotate(-40deg) scale(var(--scale));
+        transform: translateY(0.2rem) rotate(-40deg) scale(var(--scale));
         cursor: pointer;
         transition: transform .2s;
     }
@@ -163,7 +149,8 @@
 
     h2 {
         display: flex;
-        font-size: 1.2rem;
+        font-size: 1.5rem;
+        margin: 0;
     }
 
     @media screen and (max-width: 1000px) {

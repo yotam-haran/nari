@@ -1,148 +1,159 @@
 <script>
-    import MailForm from '$lib/MailForm.svelte';
-    import PerformanceList from '$lib/PerformanceList.svelte';
+	import MailForm from '$lib/MailForm.svelte';
+	import PerformanceList from '$lib/PerformanceList.svelte';
+	import Navbar from '$lib/Navbar/index.svelte';
+	import LanguageSelector from '$lib/LanguageSelector.svelte';
 </script>
 
-<div id='landing-page'>
-    <div id='landing-page__content'>
-        <PerformanceList />
-        <iframe id='landing-page-video' src="https://www.youtube.com/embed/HSyqVMcZG70" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <MailForm />
-    </div>
-    <div id='landing-page__image'>
-        <h1>
-            <span class='en'>Nari Ensemble</span>
-            <span class='he'>אנסמבל נארי</span>
-        </h1>
-        <img src='main-image.jpg' alt='Nari Baroque Ensemble' />
-    </div>
+<div id="landing-page">
+	<div id="landing-page__content">
+		<!-- <Navbar /> -->
+		<PerformanceList />
+		<iframe
+			id="landing-page-video"
+			src="https://www.youtube.com/embed/HSyqVMcZG70"
+			title="YouTube video player"
+			frameborder="0"
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+			allowfullscreen
+		/>
+		<MailForm />
+	</div>
+	<div id="landing-page__image">
+		<LanguageSelector />
+		<h1>
+			<span class="en">Nari Ensemble</span>
+			<span class="he">אנסמבל נארי</span>
+		</h1>
+		<img src="main-image.jpg" alt="Nari Baroque Ensemble" />
+	</div>
 </div>
 
 <style lang="scss">
-    #landing-page-video {
-        display: block;
-        width: 480px;
-        aspect-ratio: 1.8;
-        border-radius: 0.5rem;
-        box-shadow: 0 0 0.5rem #aaa;
-        margin: 2.5rem auto;
-    }
-    h1 {
-        position: absolute;
-        top: 2rem;
-        display: flex;
-        flex-direction: column;
-        width: 25rem;
-        line-height: 0.8;
-        color: #fff;
-        text-shadow: 1px 1px 0.1rem #191919; 
-        transform: translateX(1rem);
-    }
-    h1 .en {
-        font-family: 'Cairo', sans-serif;
-        font-size: 3rem;
-    }
-    h1 .he {
-        font-family: 'Bellefair', sans-serif;
-        align-self: flex-end;
-        font-size: 4rem;
-    }
+	:root {
+		--landingPageImageWidth: 45vw;
+	}
 
-    #landing-page {
-        display: flex;
-        width: 100%;
-        min-height: 100%;
-        overflow: none;
+	#landing-page-video {
+		display: block;
+		width: 480px;
+		aspect-ratio: 1.8;
+		border-radius: 0.5rem;
+		box-shadow: 0 0 0.5rem #aaa;
+		margin: 2.5rem auto;
+	}
+	h1 {
+		position: absolute;
+		top: 2rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 25rem;
+		line-height: 0.8;
+		color: #fff;
+		text-shadow: 0.1rem 0.1rem 0.5rem #191919;
+		transform: translateX(1rem);
+	}
+	h1 .en {
+		font-family: 'Cairo', sans-serif;
+		font-size: 3rem;
+	}
+	h1 .he {
+		font-family: 'Bellefair', sans-serif;
+		/*align-self: flex-end;*/
+		font-size: 4rem;
+	}
 
-        --cream: rgb(255, 246, 233);
-    }
-    #landing-page__image {
-        width: 50vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        position: relative;
-        z-index: 1;
-        max-height: 100vh;
-        user-select: none;
-        position: fixed;
-        top: 0;
-        right: 0;
-    }
+	#landing-page {
+		display: flex;
+		width: 100%;
+		min-height: 100%;
+		overflow: none;
+		flex-flow: wrap;
 
-    #landing-page__image::before {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        display: block;
-        background-color: rgba(255, 246, 233, 0.2);
-    }
+		--nav-height: 4rem;
+		--cream: rgb(255, 246, 233);
+	}
 
-    #landing-page__image img {
-        height: 100vh;
-    }
+	#landing-page__image {
+		width: 45vw;
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+		position: relative;
+		z-index: 1;
+		max-height: 100vh;
+		user-select: none;
+		position: fixed;
+		top: 0;
+		right: 0;
+	}
 
-    #landing-page__content {
-        width: 50vw;
-        background-color: var(--cream);
-        box-shadow: 8px 0 8px 8px var(--cream);
-        z-index: 2;
-    }
+	#landing-page__image img {
+		height: 100vh;
+	}
 
-    @media screen and (max-width: 1024px) {
-        #landing-page {
-            flex-direction: column-reverse;
-            justify-content: flex-end;
-            min-height: unset;
-        }
+	#landing-page__content {
+		width: calc(100% - var(--landingPageImageWidth));
+		background-color: var(--cream);
+		box-shadow: 0.25rem 0 0.5rem 0.5rem rgba(0, 0, 0, 0.5);
+		z-index: 2;
+	}
 
-        #landing-page__image img {
-            width: 100%;
-            height: unset;
-        }
+	@media screen and (max-width: 1024px) {
+		#landing-page {
+			flex-direction: column-reverse;
+			justify-content: flex-end;
+			min-height: unset;
+		}
 
-        #landing-page__image {
-            flex: unset;
-            position: static;
-            height: unset;
-            width: 100%;
-        }
+		#landing-page__image img {
+			width: 100%;
+			height: unset;
+		}
 
-        #landing-page__content {
-            width: 100%;
-        }
+		#landing-page__image {
+			flex: unset;
+			position: static;
+			height: unset;
+			width: 100%;
+		}
 
-        #landing-page-video {
-            transform: translateX(-0.5rem);
-        }
-    }
+		#landing-page__content {
+			width: 100%;
+		}
 
-    @media screen and (max-width: 600px) {
-        h1 {
-            width: 66vw;
-            top: 1vw;
-            transform: translateX(5vw);
-        }
+		#landing-page-video {
+			transform: translateX(-0.5rem);
+		}
+	}
 
-        h1 .en {
-            font-size: 8vw;
-        }
+	@media screen and (max-width: 600px) {
+		h1 {
+			width: 66vw;
+			top: 1vw;
+			transform: translateX(5vw);
+		}
 
-        h1 .he {
-            font-size: 11vw;
-        }
+		h1 .en {
+			font-size: 8vw;
+		}
 
-        #landing-page-video {
-            width: 80%;
-        }
-    }
+		h1 .he {
+			font-size: 11vw;
+		}
 
-    @media screen and (max-width: 420px) {
-        #landing-page-video {
-            width: 100%;
-            border-radius: 0;
-        }
-    }
+		#landing-page-video {
+			width: 80%;
+		}
+	}
+
+	@media screen and (max-width: 420px) {
+		#landing-page-video {
+			width: 100%;
+			border-radius: 0;
+		}
+	}
 </style>

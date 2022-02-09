@@ -1,6 +1,7 @@
 <script>
+    import { language } from '../utils/language.js';
+    
     $: dialogOpen = false;
-    $: console.log(dialogOpen)
 </script>
 
 <svelte:head>
@@ -9,8 +10,7 @@
 </svelte:head>
 
 <button id='subscribe-button' on:click={() => dialogOpen = true}>
-    <div>Subscribe to Our Mailing List</div>
-    <div style='align-self: flex-end'>הרשמה לרשימת הדיוור שלנו</div>
+    <div>{$language.id === 'en' ? 'Subscribe to Our Mailing List' : 'הרשמה לרשימת הדיוור שלנו'}</div>
 </button>
 
 <dialog class={dialogOpen ? 'is-open' : ''}>
@@ -46,14 +46,12 @@
 <style>
     #subscribe-button {
         display: flex;
-        align-items: flex-start;
         flex-direction: column;
         margin: 0 auto 2rem;
         font: inherit;
         background-color: #fff;
         border-radius: 0.5rem;
-        padding: 0.5rem 1rem;
-        width: 20rem;
+        padding: 1rem 1.3rem;
         cursor: pointer;
         border: 1px solid #eee;
         box-shadow: 0.1rem 0.1rem 0.2rem #eee;
