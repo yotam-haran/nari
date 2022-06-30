@@ -7,9 +7,10 @@
 
 <div id='landing-page'>
     <div id='landing-page__content'>
-        
-        <iframe id='landing-page-video' src="https://www.youtube.com/embed/HSyqVMcZG70" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <MailForm />
+        <div id='landing-page__wrapper'>
+            <iframe id='landing-page-video' src="https://www.youtube.com/embed/HSyqVMcZG70" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <MailForm />
+        </div>
         <hr style='width: 80%; border: none; height: 1px; background-color: #ccc; margin: 4rem auto 5rem' />
         <iframe id='landing-page-video' src="https://www.youtube.com/embed/kChNUffGC5M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <div id='landing-page__bio'>
@@ -101,6 +102,12 @@
         right: 0;
     }
 
+    #landing-page__wrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
     /*
     #landing-page__image::before {
         content: '';
@@ -159,6 +166,18 @@
         #landing-page-video {
             transform: translateX(-0.5rem);
         }
+
+        #landing-page__bio {
+            flex-direction: column;
+        }
+
+        #landing-page__wrapper {
+            flex-direction: column-reverse;
+        }
+
+        hr {
+            margin: 0 auto 3rem
+        }
     }
 
     @media screen and (max-width: 600px) {
@@ -179,12 +198,21 @@
         #landing-page-video {
             width: 80%;
         }
+
+        #landing-page__bio {
+            padding: 2rem 3rem;
+        }
     }
 
     @media screen and (max-width: 420px) {
         #landing-page-video {
-            width: 100%;
+            width: 90%;
             border-radius: 0;
+            transform: translateX(.1rem);
+        }
+        
+        #landing-page__bio {
+            padding: 2rem;
         }
     }
 </style>
