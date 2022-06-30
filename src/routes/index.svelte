@@ -1,9 +1,39 @@
 <script>
-    import MailForm from '$lib/MailForm.svelte';
-    import PerformanceList from '$lib/PerformanceList.svelte';
+    import MailForm from '$lib/MailFormInline.svelte';
+    // import PerformanceList from '$lib/PerformanceList.svelte';
+    import bioEn from '$lib/i18n/en/bio.json'
+    import bioHe from '$lib/i18n/he/bio.json'
 </script>
 
 <div id='landing-page'>
+    <div id='landing-page__content'>
+        
+        <iframe id='landing-page-video' src="https://www.youtube.com/embed/HSyqVMcZG70" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <MailForm />
+        <hr style='width: 80%; border: none; height: 1px; background-color: #ccc; margin: 4rem auto 5rem' />
+        <iframe id='landing-page-video' src="https://www.youtube.com/embed/kChNUffGC5M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div id='landing-page__bio'>
+            <div>
+                <h2>About Us</h2>
+                {bioEn.nari.short}
+            </div>
+            <div dir='rtl'>
+                <h2>עלינו</h2>
+                {bioHe.nari.short}
+            </div>
+        </div>
+        <!-- <PerformanceList /> -->
+    </div>
+    <div id='landing-page__image'>
+        <h1>
+            <span class='en'>Nari Ensemble</span>
+            <span class='he'>אנסמבל נארי</span>
+        </h1>
+        <img src='main-image.jpg' alt='Nari Baroque Ensemble' />
+    </div>
+</div>
+
+<!-- <div id='landing-page'>
     <div id='landing-page__content'>
         <PerformanceList />
         <iframe id='landing-page-video' src="https://www.youtube.com/embed/HSyqVMcZG70" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -16,13 +46,13 @@
         </h1>
         <img src='main-image.jpg' alt='Nari Baroque Ensemble' />
     </div>
-</div>
+</div> -->
 
 <style lang="scss">
     #landing-page-video {
         display: block;
         width: 480px;
-        aspect-ratio: 1.8;
+        aspect-ratio: 1.75;
         border-radius: 0.5rem;
         box-shadow: 0 0 0.5rem #aaa;
         margin: 2.5rem auto;
@@ -57,7 +87,7 @@
         --cream: rgb(255, 246, 233);
     }
     #landing-page__image {
-        width: 50vw;
+        width: 40vw;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -71,6 +101,7 @@
         right: 0;
     }
 
+    /*
     #landing-page__image::before {
         content: '';
         position: absolute;
@@ -79,17 +110,28 @@
         display: block;
         background-color: rgba(255, 246, 233, 0.2);
     }
+    */
 
     #landing-page__image img {
         height: 100vh;
     }
 
     #landing-page__content {
-        width: 50vw;
+        width: 60vw;
         background-color: var(--cream);
-        box-shadow: 8px 0 8px 8px var(--cream);
+        box-shadow: 4px 0 8px #aaa;
         z-index: 2;
     }
+
+    #landing-page__bio {
+        display: flex;
+        gap: 4rem;
+        padding: 2rem 6rem;
+        font-size: .9rem;
+        text-align: justify;
+    }
+
+
 
     @media screen and (max-width: 1024px) {
         #landing-page {
